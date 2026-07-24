@@ -1,0 +1,13 @@
+{
+  "name": "atomberg-e2e",
+  "version": "1.0.0",
+  "description": "Playwright E2E test suite for atomberg.com covering search/filtering and cart management",
+  "scripts": {
+    "test": "playwright test",
+    "test:headed": "playwright test --headed",
+    "report": "playwright show-report"
+  },
+  "devDependencies": {
+    "@playwright/test": "^1.47.0"
+  }
+}
