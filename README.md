@@ -7,7 +7,7 @@ Playwright end-to-end tests for [atomberg.com](https://atomberg.com), covering t
 
 ## Framework choice
 
-**Playwright + TypeScript** was chosen over Cypress/Selenium for:
+**Playwright + TypeScript**
 - Built-in auto-waiting on actionability (visible, enabled, stable) — removes the need for manual sleeps in almost all cases
 - First-class `getByRole` locators, which align with accessibility semantics and are more resilient to markup changes than raw CSS selectors
 - Native trace viewer and HTML reporter for debugging failures without extra tooling
@@ -63,15 +63,6 @@ View the HTML report after a run:
 ```bash
 npm run report
 ```
-
-## Design notes
-
-- **No hard-coded sleeps.** Waits are handled via Playwright's built-in auto-waiting and explicit `expect(locator).toBeVisible()` assertions, which poll until the condition is true or the timeout is hit.
-- **Negative-path assertions included** in both spec files — e.g. asserting a graceful "no products found" state instead of an error page on `search.spec.ts`, and asserting the cart badge does not retain a stale count after the last item is removed in `cart.spec.ts`.
-- **Edge cases included** — whitespace-only search input, repeated Enter presses on an empty query, removing the sole item in a cart, and adding a second distinct product without disturbing the first line item.
-- **`workers: 1`** is set intentionally in `playwright.config.ts` to avoid generating concurrent, high-volume traffic against a live production site.
-- Tests run against the real production site (no test/staging environment or mocked backend was available), so cart-mutation tests (add/remove/quantity change) are written to leave the cart in a clean, empty state by the end of each test where possible.
-
 ## CI
 
 `.github/workflows/playwright.yml` runs the suite on every push and pull request to `main`, installs Chromium only (to keep CI time down), and uploads the HTML report as a build artifact regardless of pass/fail.
