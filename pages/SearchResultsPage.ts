@@ -8,8 +8,6 @@ export class SearchResultsPage {
   constructor(page: Page) {
     this.page = page;
     this.noResultsMessage = page.getByText('No products found');
-    // Product titles render as divs with the exact product name text.
-    // Used generically here; individual tests target specific product names when asserting relevance.
     this.productCards = page.locator('[class*="product"]');
   }
 
