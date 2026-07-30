@@ -24,19 +24,10 @@ export class HomePage {
   async search(term: string) {
     await this.searchIcon.click();
     await this.searchInput.fill(term);
-    // Typing triggers a debounced autocomplete request; a spinner shows until
-    // it resolves and the suggestion blocks render. Pressing Enter before
-    // that settles races the UI, so wait for at least one suggestion block
-    // to appear first.
     await this.suggestionsResultsBlock.first().waitFor({ state: 'visible', timeout: 5000 });
     await this.searchInput.press('Enter');
   }
 
-  /**
-   * Clicks a specific suggestion row in the autocomplete dropdown instead of
-   * pressing Enter. Use this when the test cares about the suggestion-click
-   * path rather than raw free-text submission.
-   */
   async searchViaSuggestion(term: string, suggestionText: string) {
     await this.searchIcon.click();
     await this.searchInput.fill(term);
