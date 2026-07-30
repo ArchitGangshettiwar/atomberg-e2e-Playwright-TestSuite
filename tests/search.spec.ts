@@ -11,11 +11,15 @@ test.describe('Product search and filtering', () => {
     await home.goto();
     await home.search('ceiling fan');
 
+    //await page.waitForTimeout(5000);
+
     await expect(results.productByName('Aris Gladius Smart Ceiling Fan')).toBeVisible();
+
+    //await page.waitForTimeout(5000);
     //await expect(results.productByName('Razon Ceiling Fan')).toBeVisible();
   });
 
-  test('nonsense search term shows a no-results state, not an error @negative', async ({ page }) => {
+  test('invalid search term shows a no-results state, not an error @negative', async ({ page }) => {
     const home = new HomePage(page);
     const results = new SearchResultsPage(page);
 
@@ -52,11 +56,12 @@ test.describe('Product search and filtering', () => {
     const home = new HomePage(page);
 
     await home.goto();
-    await home.fansNavLink.click();
+    //await page.waitForTimeout(5000);
     await home.fansNavLink.click();
     await page.getByRole('link', { name: 'Wall Fans' }).click();
 
     await expect(page.getByText(/Renesa Wall Fan/)).toBeVisible();
+    //await page.waitForTimeout(5000);
     await expect(page.getByText(/SilenceAire Hi-Speed Wall fan/)).toBeVisible();
   });
 

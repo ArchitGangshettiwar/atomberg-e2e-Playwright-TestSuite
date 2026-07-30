@@ -5,13 +5,15 @@ import { CartPage } from '../pages/CartPage';
 import { CategoryPage } from '../pages/CategoryPage';
 
 test.describe('Add to cart and cart management', () => {
-  test('adding a product from its detail page reflects correct default quantity @positive', async ({ page }) => {
+  test('adding a product from its detail page @positive', async ({ page }) => {
     await page.goto('https://atomberg.com/althea-cold-press-juicer');
 
     const product = new ProductPage(page);
     await expect(page.getByRole('heading', { name: 'Atomberg Althea Cold Press Juicer', exact: true })).toBeVisible();
     await expect(product.addToCartButton).toBeVisible();
     await expect(product.quantityField).toContainText('1');
+
+    await product.addToCart();
   });
 
 
@@ -28,7 +30,7 @@ test.describe('Add to cart and cart management', () => {
     await expect(cart.startShoppingLink).toBeVisible();
   });
 
-  test('cart badge count matches number of items actually in the cart @negative', async ({ page }) => {
+  test('cart badge count matches number of items actually in the cart @positive', async ({ page }) => {
     await page.goto('https://atomberg.com/althea-cold-press-juicer');
 
     const product = new ProductPage(page);
