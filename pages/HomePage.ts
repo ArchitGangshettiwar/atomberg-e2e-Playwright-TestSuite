@@ -14,14 +14,6 @@ export class HomePage {
     this.searchInput = page.getByRole('textbox', { name: 'Search here' });
     this.cartLink = page.getByRole('link', { name: /Cart/ });
     this.fansNavLink = page.getByRole('link', { name: 'Fans', exact: true });
-    // The autocomplete dropdown renders each suggestion group (Popular
-    // Searches, Categories, Pages, and — only when the browser already has
-    // search history — Recent Searches) inside a shared container with a
-    // class prefixed "resultsBlock_block". Matching on the prefix rather than
-    // the full class (e.g. resultsBlock_block__3XZxU) survives CSS-module
-    // hash changes across deploys. We deliberately don't wait on
-    // "Recent Searches" specifically, since a fresh CI browser context has no
-    // history and that section never renders there.
     this.suggestionsResultsBlock = page.locator('[class*="resultsBlock_block"]');
   }
 
