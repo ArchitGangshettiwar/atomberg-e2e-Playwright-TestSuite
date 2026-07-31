@@ -5,7 +5,7 @@ export default defineConfig({
   fullyParallel: false,
   forbidOnly: !!process.env.CI,
   retries: process.env.CI ? 1 : 0,
-  workers: 1, // avoid hammering the live production site with concurrent sessions
+  workers: 1, 
   reporter: [['html', { open: 'never' }], ['list']],
   use: {
     baseURL: 'https://atomberg.com',
